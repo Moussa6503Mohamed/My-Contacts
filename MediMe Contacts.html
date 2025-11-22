@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Contact Directory - Rotating Cards</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+            /* Ensure full height for centering */
+            min-height: 100vh;
+        }
+
+        /* --- 3D Cube Styles --- */
+        /* Perspective is critical for the 3D effect */
+        .cube-container {
+            width: 320px; /* Width of the single card/face */
+            height: 400px; /* Height of the single card/face */
+            perspective: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d; /* Key for 3D rotation */
+            transition: transform 0.6s ease-in-out; /* Smooth rotation animation */
+        }
+
+        .face {
+            position: absolute;
+            width: 320px;
+            height: 400px;
+            backface-visibility: hidden; /* Hide the back side of the faces */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Positioning the four faces of the cube */
+        /* Z = Half the width (320px / 2 = 160px) */
+        .face-1 { transform: rotateY(0deg) translateZ(160px); border-top-color: #4f46e5; }
+        .face-2 { transform: rotateY(90deg) translateZ(160px); border-top-color: #10b981; }
+        .face-3 { transform: rotateY(180deg) translateZ(160px); border-top-color: #f59e0b; }
+        .face-4 { transform: rotateY(-90deg) translateZ(160px); border-top-color: #ef4444; }
+
+        .face-content {
+             /* Ensures content is centered within the face */
+             text-align: center;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+        }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <header class="bg-gray-800 shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-white">MediMe Team</h1>
+            <a href="#" class="text-indigo-300 hover:text-indigo-100 transition duration-150">Get in Touch</a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <p class="text-lg text-indigo-600 font-semibold mb-2">Connect with us</p>
+            <h2 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">Meet Our Team</h2>
+            <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                Use the arrows to browse the team members one by one.
+            </p>
+        </div>
+
+        <!-- 3D Cube Container -->
+        <div class="cube-container mb-10">
+            <div id="contactCube" class="cube">
+
+                <!-- Face 1: You -->
+                <div class="face face-1 bg-white rounded-xl shadow-xl border-t-4">
+                    <div class="face-content">
+                        <!-- FIX for S6851: Removed redundant word "picture" from alt attribute -->
+                        <img class="w-24 h-24 rounded-full mx-auto object-cover mb-4 shadow-md"
+                             src="https://res.cloudinary.com/dc6l5sey9/image/upload/v1763853640/WhatsApp_Image_2025-11-23_at_01.10.50_6d1c4b59_aio0zf.jpg"
+                             alt="Your profile photo"
+                             onerror="this.onerror=null; this.src='https://placehold.co/96x96/4f46e5/ffffff?text=YOU';">
+                        <h3 class="text-xl font-bold text-gray-900">Mohamed Moussa</h3>
+                        <p class="text-sm text-indigo-600 mb-4">Data Analyst</p>
+                        <div class="space-y-2 text-left w-full max-w-xs mb-4">
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Email:</span> Moussa03mohamed@gmail.com
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Phone:</span> +20 1000464668
+                            </p>
+                        </div>
+
+                        <!-- NEW: Social Links -->
+                        <div class="flex space-x-6 justify-center">
+                            <!-- LinkedIn -->
+                            <a href="https://www.linkedin.com/in/mohamed-moussa-329a321b6/" target="_blank" title="LinkedIn Profile"
+                               class="text-indigo-600 hover:text-indigo-800 transition duration-150 transform hover:scale-110">
+                                <!-- LinkedIn SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.568-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <!-- GitHub -->
+                            <a href="https://github.com/Moussa6503Mohamed" target="_blank" title="GitHub Profile"
+                               class="text-gray-600 hover:text-gray-900 transition duration-150 transform hover:scale-110">
+                                <!-- GitHub SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.803 8.232 11.385.6.113.82-.258.82-.577v-2.022c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.082-.743.085-.729.085-.729 1.196.084 1.816 1.25 1.816 1.25 1.065 1.839 2.793 1.304 3.476.994.108-.773.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.312.469-2.385 1.234-3.22-.124-.305-.536-1.524.118-3.18 0 0 1.008-.321 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.29-1.551 3.298-1.23 3.298-1.23.654 1.656.242 2.875.118 3.18.765.835 1.234 1.908 1.234 3.22 0 4.609-2.807 5.624-5.479 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.219.692.823.577 4.792-1.583 8.23-6.084 8.23-11.385 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- END Social Links -->
+
+                        <button onclick="copyToClipboard('+20 1000464668', 'btn-you')" id="btn-you"
+                                class="mt-4 w-full py-2 px-4 bg-indigo-500 text-white font-semibold rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150">
+                            Copy Phone
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Face 2: Colleague 1 (Jane Doe) -->
+                <div class="face face-2 bg-white rounded-xl shadow-xl border-t-4">
+                    <div class="face-content">
+                        <!-- FIX for S6851: Removed redundant word "picture" from alt attribute -->
+                        <img class="w-24 h-24 rounded-full mx-auto object-cover mb-4 shadow-md"
+                             src="https://placehold.co/96x96/10b981/ffffff?text=JANE"
+                             alt="Jane Doe's profile photo"
+                             onerror="this.onerror=null; this.src='https://placehold.co/96x96/10b981/ffffff?text=JANE';">
+                        <h3 class="text-xl font-bold text-gray-900">Jane Doe</h3>
+                        <p class="text-sm text-emerald-600 mb-4">Marketing Director</p>
+                        <div class="space-y-2 text-left w-full max-w-xs mb-4">
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Email:</span> jane.doe@example.com
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Phone:</span> (555) 987-6543
+                            </p>
+                        </div>
+                        
+                        <!-- NEW: Social Links -->
+                        <div class="flex space-x-6 justify-center">
+                            <!-- LinkedIn -->
+                            <a href="https://linkedin.com/in/janedoe" target="_blank" title="LinkedIn Profile"
+                               class="text-emerald-600 hover:text-emerald-800 transition duration-150 transform hover:scale-110">
+                                <!-- LinkedIn SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.568-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <!-- GitHub -->
+                            <a href="https://github.com/janedev" target="_blank" title="GitHub Profile"
+                               class="text-gray-600 hover:text-gray-900 transition duration-150 transform hover:scale-110">
+                                <!-- GitHub SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.803 8.232 11.385.6.113.82-.258.82-.577v-2.022c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.082-.743.085-.729.085-.729 1.196.084 1.816 1.25 1.816 1.25 1.065 1.839 2.793 1.304 3.476.994.108-.773.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.312.469-2.385 1.234-3.22-.124-.305-.536-1.524.118-3.18 0 0 1.008-.321 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.29-1.551 3.298-1.23 3.298-1.23.654 1.656.242 2.875.118 3.18.765.835 1.234 1.908 1.234 3.22 0 4.609-2.807 5.624-5.479 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.219.692.823.577 4.792-1.583 8.23-6.084 8.23-11.385 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- END Social Links -->
+                        
+                        <button onclick="copyToClipboard('(555) 987-6543', 'btn-jane')" id="btn-jane"
+                                class="mt-4 w-full py-2 px-4 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-150">
+                            Copy Phone
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Face 3: Colleague 2 (Mark Smith) -->
+                <div class="face face-3 bg-white rounded-xl shadow-xl border-t-4">
+                    <div class="face-content">
+                        <!-- FIX for S6851: Removed redundant word "picture" from alt attribute -->
+                        <img class="w-24 h-24 rounded-full mx-auto object-cover mb-4 shadow-md"
+                             src="https://placehold.co/96x96/f59e0b/ffffff?text=MARK"
+                             alt="Mark Smith's profile photo"
+                             onerror="this.onerror=null; this.src='https://placehold.co/96x96/f59e0b/ffffff?text=MARK';">
+                        <h3 class="text-xl font-bold text-gray-900">Mark Smith</h3>
+                        <p class="text-sm text-yellow-600 mb-4">Development Lead</p>
+                        <div class="space-y-2 text-left w-full max-w-xs mb-4">
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Email:</span> mark.smith@example.com
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Phone:</span> (555) 555-1212
+                            </p>
+                        </div>
+                        
+                        <!-- NEW: Social Links -->
+                        <div class="flex space-x-6 justify-center">
+                            <!-- LinkedIn -->
+                            <a href="https://linkedin.com/in/marksmith" target="_blank" title="LinkedIn Profile"
+                               class="text-yellow-600 hover:text-yellow-800 transition duration-150 transform hover:scale-110">
+                                <!-- LinkedIn SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.568-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <!-- GitHub -->
+                            <a href="https://github.com/marksdev" target="_blank" title="GitHub Profile"
+                               class="text-gray-600 hover:text-gray-900 transition duration-150 transform hover:scale-110">
+                                <!-- GitHub SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.803 8.232 11.385.6.113.82-.258.82-.577v-2.022c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.082-.743.085-.729.085-.729 1.196.084 1.816 1.25 1.816 1.25 1.065 1.839 2.793 1.304 3.476.994.108-.773.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.312.469-2.385 1.234-3.22-.124-.305-.536-1.524.118-3.18 0 0 1.008-.321 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.29-1.551 3.298-1.23 3.298-1.23.654 1.656.242 2.875.118 3.18.765.835 1.234 1.908 1.234 3.22 0 4.609-2.807 5.624-5.479 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.219.692.823.577 4.792-1.583 8.23-6.084 8.23-11.385 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- END Social Links -->
+                        
+                        <button onclick="copyToClipboard('(555) 555-1212', 'btn-mark')" id="btn-mark"
+                                class="mt-4 w-full py-2 px-4 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition duration-150">
+                            Copy Phone
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Face 4: Colleague 3 (Sarah Lee) -->
+                <div class="face face-4 bg-white rounded-xl shadow-xl border-t-4">
+                    <div class="face-content">
+                        <!-- FIX for S6851: Removed redundant word "picture" from alt attribute -->
+                        <img class="w-24 h-24 rounded-full mx-auto object-cover mb-4 shadow-md"
+                             src="https://placehold.co/96x96/ef4444/ffffff?text=SARAH"
+                             alt="Sarah Lee's profile photo"
+                             onerror="this.onerror=null; this.src='https://placehold.co/96x96/ef4444/ffffff?text=SARAH';">
+                        <h3 class="text-xl font-bold text-gray-900">Sarah Lee</h3>
+                        <p class="text-sm text-red-600 mb-4">Client Relations</p>
+                        <div class="space-y-2 text-left w-full max-w-xs mb-4">
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Email:</span> sarah.lee@example.com
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                <span class="font-semibold">Phone:</span> (555) 777-8888
+                            </p>
+                        </div>
+                        
+                        <!-- NEW: Social Links -->
+                        <div class="flex space-x-6 justify-center">
+                            <!-- LinkedIn -->
+                            <a href="https://linkedin.com/in/sarahlee" target="_blank" title="LinkedIn Profile"
+                               class="text-red-600 hover:text-red-800 transition duration-150 transform hover:scale-110">
+                                <!-- LinkedIn SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.568-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <!-- GitHub -->
+                            <a href="https://github.com/sarahcodes" target="_blank" title="GitHub Profile"
+                               class="text-gray-600 hover:text-gray-900 transition duration-150 transform hover:scale-110">
+                                <!-- GitHub SVG Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.803 8.232 11.385.6.113.82-.258.82-.577v-2.022c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.082-.743.085-.729.085-.729 1.196.084 1.816 1.25 1.816 1.25 1.065 1.839 2.793 1.304 3.476.994.108-.773.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.312.469-2.385 1.234-3.22-.124-.305-.536-1.524.118-3.18 0 0 1.008-.321 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.29-1.551 3.298-1.23 3.298-1.23.654 1.656.242 2.875.118 3.18.765.835 1.234 1.908 1.234 3.22 0 4.609-2.807 5.624-5.479 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.219.692.823.577 4.792-1.583 8.23-6.084 8.23-11.385 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- END Social Links -->
+                        
+                        <button onclick="copyToClipboard('(555) 777-8888', 'btn-sarah')" id="btn-sarah"
+                                class="mt-4 w-full py-2 px-4 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-150">
+                            Copy Phone
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End 3D Cube Container -->
+
+        <!-- Rotation Controls (Moved below the card) -->
+        <div class="flex items-center justify-center space-x-16 w-full max-w-xs">
+            <button id="prevBtn" onclick="rotateCube(-1)" title="Previous Contact"
+                    class="p-4 bg-indigo-100 text-indigo-600 rounded-full shadow-lg hover:bg-indigo-200 transition duration-150 transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <button id="nextBtn" onclick="rotateCube(1)" title="Next Contact"
+                    class="p-4 bg-indigo-100 text-indigo-600 rounded-full shadow-lg hover:bg-indigo-200 transition duration-150 transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+        <!-- End Rotation Controls -->
+
+        <!-- Custom Notification Message Box -->
+        <div id="notification" class="fixed bottom-4 right-4 bg-gray-900 text-white p-4 rounded-lg shadow-2xl opacity-0 transition-opacity duration-300 pointer-events-none" role="alert">
+            <p id="notification-text"></p>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-800 mt-12">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            &copy; 2025 Team Directory. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // State to track the current rotation
+        let currentRotation = 0; // Starts at 0 degrees (Face 1)
+        const cube = document.getElementById('contactCube');
+        const rotationStep = 90; // 90 degrees per face
+
+        /**
+         * Rotates the 3D cube to show the next or previous face.
+         * @param {number} direction - 1 for next (clockwise), -1 for previous (counter-clockwise).
+         */
+        function rotateCube(direction) {
+            // Update rotation based on direction
+            currentRotation += direction * rotationStep;
+
+            // Apply the new rotation transform to the cube element
+            cube.style.transform = `rotateY(${currentRotation}deg)`;
+        }
+
+        /**
+         * The copyToClipboard function attempts to copy the provided text to the user's clipboard
+         * and shows a brief notification message upon success.
+         * @param {string} text - The text content to be copied to the clipboard.
+         * @param {string} buttonId - The ID of the button that triggered the action.
+         */
+        function copyToClipboard(text, buttonId) {
+            try {
+                // Create a temporary input element to hold the text
+                const tempInput = document.createElement('input');
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+                // Execute the copy command
+                document.execCommand('copy');
+
+                // Show Notification
+                showNotification(`Copied ${text} to clipboard!`, buttonId);
+
+            } catch (err) {
+                showNotification('Failed to copy to clipboard.', buttonId, true);
+                console.error('Copy command failed:', err);
+            }
+        }
+
+        /**
+         * Displays a temporary notification/message box to the user.
+         * @param {string} message - The text message to display.
+         * @param {string} buttonId - The ID of the button that triggered the action.
+         * @param {boolean} isError - If true, treats the notification as an error (optional).
+         */
+        function showNotification(message, buttonId, isError = false) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            const button = document.getElementById(buttonId);
+
+            notificationText.textContent = message;
+
+            // Reset classes
+            notification.classList.remove('bg-gray-900', 'bg-red-600');
+            notification.classList.add(isError ? 'bg-red-600' : 'bg-gray-900');
+
+            // Make it visible and accessible
+            notification.classList.remove('opacity-0', 'pointer-events-none');
+            notification.classList.add('opacity-100');
+
+            // Temporarily change button text for feedback
+            if (button) {
+                const originalButtonText = button.textContent;
+                button.textContent = isError ? 'Error!' : 'Copied!';
+                button.classList.add('ring-4', 'ring-offset-2', isError ? 'ring-red-500' : 'ring-indigo-500');
+
+                // Hide the notification and revert button after a delay
+                setTimeout(() => {
+                    button.textContent = originalButtonText;
+                    button.classList.remove('ring-4', 'ring-offset-2', 'ring-red-500', 'ring-indigo-500');
+                }, 3000);
+            }
+
+            // Hide the notification after a delay (this runs regardless of button existence)
+            setTimeout(() => {
+                notification.classList.remove('opacity-100');
+                notification.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
